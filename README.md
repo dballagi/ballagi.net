@@ -28,10 +28,12 @@ src/
     books/[...slug].astro  # Individual book detail page
     tinkering/index.astro  # Tinkering listing
     tinkering/[slug].astro # Individual tinkering article
+  scripts/
+    avatarData.js # Base64 avatar data — gitignored, never committed
   styles/
     global.css    # All styles (single file, no framework)
 public/
-  img/            # Static images (avatar, favicon, tinkering SVGs)
+  img/            # Static images (favicon, tinkering SVGs)
 .env.example      # Required environment variables
 ```
 
@@ -53,6 +55,28 @@ Install dependencies:
 ```bash
 npm install
 ```
+
+## Avatar setup
+
+The profile photo lives in `src/scripts/avatarData.js`, which is **gitignored** — it is never committed. The file exports a single base64 data URI:
+
+```js
+export const avatarData = 'data:image/jpeg;base64,...';
+```
+
+Generate it from a local JPEG with PowerShell:
+
+```powershell
+$photo = "C:\path\to\photo.jpg"
+$bytes = [System.IO.File]::ReadAllBytes($photo)
+$b64 = [System.Convert]::ToBase64String($bytes)
+$js = "export const avatarData = 'data:image/jpeg;base64,$b64';"
+[System.IO.File]::WriteAllText("src/scripts/avatarData.js", $js, (New-Object System.Text.UTF8Encoding $false))
+```
+
+The source photo should be a square crop (the site uses 192×192 px internally, scaled to 96 px via CSS). Without this file the avatar circle renders empty but the site builds and works normally.
+
+At runtime the avatar is drawn onto a `<canvas>` element with a circular clip path. Right-click is suppressed on the element — this only blocks casual context-menu saving, not a determined viewer with devtools.
 
 ## Adding books
 

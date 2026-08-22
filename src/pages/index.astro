@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { avatarData } from '../scripts/avatarData.js';
 import { getEntry, render } from 'astro:content';
 
 const profile = await getEntry('profile', 'index');
@@ -19,7 +20,7 @@ const items = experience.map(item => {
 
 <Layout title={name} description={`${name} - ${tagline}`}>
   <article class="profile-page">
-    <img src={`${import.meta.env.BASE_URL}img/avatar.png`} alt={name} class="profile-avatar" />
+    <canvas id="profile-avatar-canvas" class="profile-avatar" width="192" height="192" role="img" aria-label={name}></canvas>
     <div class="profile-header">
       <h1>{name}</h1>
       <p class="tagline">{tagline}</p>
@@ -109,3 +110,19 @@ const items = experience.map(item => {
 
   </article>
 </Layout>
+
+<script define:vars={{ avatarData }}>
+  const canvas = document.getElementById('profile-avatar-canvas');
+  if (canvas) {
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      ctx.beginPath();
+      ctx.arc(96, 96, 96, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(img, 0, 0, 192, 192);
+    };
+    img.src = avatarData;
+  }
+</script>

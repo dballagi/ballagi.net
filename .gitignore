@@ -17,3 +17,7 @@ Thumbs.db
 # Editor
 .vscode/settings.json
 
+
+# Generated from local photo — not committed
+src/styles/avatar.css
+src/scripts/avatarData.js
