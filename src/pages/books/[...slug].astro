@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { bookSlug } from '../../lib/bookSlug';
+
+export async function getStaticPaths() {
+  const books = await getCollection('books');
+
+  return books.map(book => ({
+    params: { slug: bookSlug(book.id) },
+    props: { book, coverUrl: book.data.cover ?? null },
+  }));
+}
+
+const { book, coverUrl } = Astro.props;
+const { Content } = await render(book);
+const { title, author, series, seriesNumber, date, rating, tags } = book.data;
+
+const stars = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : null;
+const dateStr = date.toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'long' });
+---
+
+<Layout title={`${title} - ballagi.net`} description={`Notes on ${title} by ${author}`}>
+  <article class="book-page">
+    <div class="book-sticky-header" id="book-sticky-header">
+      {coverUrl && (
+        <button class="book-cover-btn" aria-label={`View cover of ${title}`}
+          data-large={coverUrl.replace(/-M\.jpg$/, '-L.jpg')} disabled>
+          <img src={coverUrl} alt={`Cover of ${title}`} class="book-cover" loading="eager" />
+        </button>
+      )}
+      <nav class="book-nav">
+        <a href={`${import.meta.env.BASE_URL}books`} class="back">← Books</a>
+      </nav>
+      <header>
+        <h1>{title}</h1>
+        <p class="book-meta">
+          <span class="book-meta-item">{author}</span>
+          {series && <span class="book-meta-item">{series}{seriesNumber != null ? ` #${seriesNumber}` : ''}</span>}
+          <span class="book-meta-item">{dateStr}</span>
+        </p>
+        {stars && <p class="rating">{stars}</p>}
+        {tags && (
+          <div class="tags">
+            {tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        )}
+      </header>
+    </div>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="book-disclaimer">All content belongs to its respective author and publisher. These are personal reading notes.</p>
+  </article>
+</Layout>
+
+{coverUrl && (
+  <div id="cover-lightbox" class="cover-lightbox" role="dialog" aria-modal="true" aria-label="Book cover">
+    <div class="cover-lightbox-backdrop"></div>
+    <button class="cover-lightbox-close" aria-label="Close">&times;</button>
+    <div class="cover-lightbox-spinner" id="cover-spinner"></div>
+    <img id="cover-lightbox-img" src="" alt="" class="cover-lightbox-img" />
+  </div>
+)}
+
+<script>
+  // Measure sticky site nav height so book header stacks below it
+  const siteNav = document.querySelector('body > header') as HTMLElement | null;
+  if (siteNav) {
+    document.documentElement.style.setProperty('--site-nav-height', siteNav.offsetHeight + 'px');
+  }
+  const stickyHdr = document.getElementById('book-sticky-header') as HTMLElement | null;
+  if (stickyHdr) {
+    window.addEventListener('scroll', () => {
+      stickyHdr.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+
+  const btn = document.querySelector('.book-cover-btn') as HTMLButtonElement | null;
+  const lb = document.getElementById('cover-lightbox');
+  const lbImg = document.getElementById('cover-lightbox-img') as HTMLImageElement | null;
+  const coverImg = btn?.querySelector('img') as HTMLImageElement | null;
+
+  if (coverImg) {
+    const cacheKey = 'cover:' + coverImg.src;
+
+    const markLoaded = (instant: boolean) => {
+      if (instant) coverImg.style.transition = 'none';
+      coverImg.classList.add('loaded');
+      btn?.removeAttribute('disabled');
+      sessionStorage.setItem(cacheKey, '1');
+    };
+
+    // img.complete is true when the browser already has the image (HTTP cache hit)
+    if (sessionStorage.getItem(cacheKey) || coverImg.complete) {
+      markLoaded(true);
+    } else {
+      coverImg.addEventListener('load', () => markLoaded(false), { once: true });
+    }
+  }
+
+  if (btn && lb && lbImg) {
+    const spinner = document.getElementById('cover-spinner');
+
+    btn.addEventListener('click', () => {
+      const large = btn.dataset.large ?? coverImg?.src ?? '';
+      lbImg.style.opacity = '0';
+      if (spinner) spinner.style.display = 'block';
+      lbImg.src = large;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbImg.onload = () => {
+        lbImg.style.opacity = '1';
+        if (spinner) spinner.style.display = 'none';
+      };
+    });
+
+    const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+    lb.querySelector('.cover-lightbox-backdrop')?.addEventListener('click', close);
+    lb.querySelector('.cover-lightbox-close')?.addEventListener('click', close);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  }
+</script>

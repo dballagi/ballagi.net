@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('tinkering');
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Group by "Month YYYY"
+const groups = new Map<string, typeof posts>();
+for (const post of posts) {
+  const key = post.data.date.toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'long' });
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(post);
+}
+---
+
+<Layout title="Tinkering - ballagi.net" description="Notes on things I've built or broken">
+  <section class="tinkering-page">
+    <h1>Tinkering</h1>
+    <p class="tinkering-intro">Notes on side projects, home automation experiments, and things I figured out the hard way.</p>
+    {[...groups.entries()].map(([label, groupPosts]) => (
+      <div class="post-group">
+        <h2 class="post-group-label">{label}</h2>
+        <ul class="post-list">
+          {groupPosts.map(post => {
+            const slug = post.id.replace(/\.md$/, '');
+            return (
+              <li class="post-row">
+                {post.data.image && (
+                  <div class="post-thumb-wrap">
+                    <img src={`${import.meta.env.BASE_URL}img/tinkering/${post.data.image}`} alt={post.data.title} class="post-thumb theme-img-light" />
+                    <img src={`${import.meta.env.BASE_URL}img/tinkering/${post.data.image.replace(/\.svg$/, '-dark.svg')}`} alt={post.data.title} class="post-thumb theme-img-dark" />
+                  </div>
+                )}
+                <div class="post-body">
+                  <span class="post-title-row">
+                    <span class="post-title">{post.data.title}</span>
+                  </span>
+                  {post.data.description && (
+                    <p class="post-desc">{post.data.description}</p>
+                  )}
+                </div>
+                <a href={`${import.meta.env.BASE_URL}tinkering/${slug}`} class="post-card-link" aria-label={post.data.title}></a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </section>
+</Layout>

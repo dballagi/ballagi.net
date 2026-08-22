@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" fill="none">
+  <!-- Warm muted background -->
+  <rect width="800" height="360" fill="#eae6e0"/>
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="120" x2="800" y2="120" stroke="#d8d3cb" stroke-width="1"/>
+  <line x1="0" y1="240" x2="800" y2="240" stroke="#d8d3cb" stroke-width="1"/>
+  <line x1="160" y1="0" x2="160" y2="360" stroke="#d8d3cb" stroke-width="1"/>
+  <line x1="320" y1="0" x2="320" y2="360" stroke="#d8d3cb" stroke-width="1"/>
+  <line x1="480" y1="0" x2="480" y2="360" stroke="#d8d3cb" stroke-width="1"/>
+  <line x1="640" y1="0" x2="640" y2="360" stroke="#d8d3cb" stroke-width="1"/>
+  <circle cx="160" cy="120" r="2.5" fill="#ccc6bc"/>
+  <circle cx="320" cy="120" r="2.5" fill="#ccc6bc"/>
+  <circle cx="480" cy="120" r="2.5" fill="#ccc6bc"/>
+  <circle cx="640" cy="120" r="2.5" fill="#ccc6bc"/>
+  <circle cx="160" cy="240" r="2.5" fill="#ccc6bc"/>
+  <circle cx="320" cy="240" r="2.5" fill="#ccc6bc"/>
+  <circle cx="480" cy="240" r="2.5" fill="#ccc6bc"/>
+  <circle cx="640" cy="240" r="2.5" fill="#ccc6bc"/>
+
+  <!-- IR Remote (far left) -->
+  <rect x="60" y="145" width="56" height="100" rx="10" fill="#b8b3aa" stroke="#706b63" stroke-width="1.5"/>
+  <circle cx="88" cy="168" r="10" fill="#8c8780"/>
+  <rect x="72" y="188" width="32" height="6" rx="3" fill="#9a9490"/>
+  <rect x="72" y="200" width="32" height="6" rx="3" fill="#9a9490"/>
+  <rect x="72" y="212" width="32" height="6" rx="3" fill="#9a9490"/>
+  <circle cx="88" cy="148" r="4" fill="#4a4540"/>
+
+  <!-- IR signal arcs from remote -->
+  <path d="M120 180 C148 162 148 198 120 180" stroke="#5a5550" stroke-width="2" opacity="0.85"/>
+  <path d="M120 180 C158 155 158 205 120 180" stroke="#5a5550" stroke-width="1.5" opacity="0.6"/>
+  <path d="M120 180 C168 148 168 212 120 180" stroke="#5a5550" stroke-width="1" opacity="0.38"/>
+
+  <!-- IR Blaster (small device receiving IR, re-emitting Zigbee) -->
+  <rect x="178" y="160" width="52" height="40" rx="6" fill="#b8b3aa" stroke="#706b63" stroke-width="1.5"/>
+  <rect x="184" y="167" width="14" height="10" rx="2" fill="#706a64" opacity="0.8"/>
+  <line x1="214" y1="160" x2="214" y2="144" stroke="#706b63" stroke-width="1.5"/>
+  <circle cx="214" cy="142" r="2.5" fill="#4a4540"/>
+
+  <!-- Zigbee signal (dashed line to coordinator) -->
+  <line x1="234" y1="180" x2="304" y2="180" stroke="#706b63" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <!-- Zigbee Coordinator / Hub -->
+  <rect x="304" y="155" width="64" height="50" rx="7" fill="#b8b3aa" stroke="#706b63" stroke-width="1.5"/>
+  <circle cx="322" cy="170" r="4" fill="#5aaa66" opacity="0.9"/>
+  <rect x="314" y="183" width="44" height="12" rx="3" fill="#8c8780" opacity="0.6"/>
+  <rect x="340" y="195" width="20" height="8" rx="1" fill="#8c8780" opacity="0.5"/>
+
+  <!-- Network line to HA server -->
+  <line x1="372" y1="180" x2="440" y2="180" stroke="#706b63" stroke-width="1.5"/>
+
+  <!-- Home Assistant server -->
+  <rect x="440" y="148" width="72" height="64" rx="8" fill="#b8b3aa" stroke="#706b63" stroke-width="1.5"/>
+  <path d="M462 200 L462 178 L476 166 L490 178 L490 200" stroke="#4a4540" stroke-width="1.5"/>
+  <rect x="469" y="186" width="14" height="14" rx="1" stroke="#4a4540" stroke-width="1.2"/>
+  <rect x="456" y="178" width="8" height="8" rx="1" fill="#5aaa66" opacity="0.8"/>
+
+  <!-- Signal line from HA to curtain light -->
+  <line x1="516" y1="160" x2="580" y2="120" stroke="#706b63" stroke-width="1" stroke-dasharray="3,3" opacity="0.8"/>
+
+  <!-- Curtain light (right) -->
+  <!-- Curtain rod -->
+  <line x1="570" y1="68" x2="760" y2="68" stroke="#706b63" stroke-width="3"/>
+  <circle cx="570" cy="68" r="4" fill="#706b63"/>
+  <circle cx="760" cy="68" r="4" fill="#706b63"/>
+  <!-- Vertical strands -->
+  <line x1="582" y1="68" x2="582" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="596" y1="68" x2="596" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="610" y1="68" x2="610" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="624" y1="68" x2="624" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="638" y1="68" x2="638" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="652" y1="68" x2="652" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="666" y1="68" x2="666" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="680" y1="68" x2="680" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="694" y1="68" x2="694" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="708" y1="68" x2="708" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="722" y1="68" x2="722" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="736" y1="68" x2="736" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <line x1="750" y1="68" x2="750" y2="140" stroke="#bbb5ac" stroke-width="1.5"/>
+  <!-- LED dots -->
+  <circle cx="582" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="596" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="610" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="624" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="638" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="652" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="666" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="680" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="694" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="708" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="722" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="736" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <circle cx="750" cy="142" r="3.5" fill="#f0d060" opacity="0.9"/>
+  <!-- soft glow under LEDs -->
+  <ellipse cx="666" cy="148" rx="90" ry="12" fill="#f0d060" opacity="0.08"/>
+</svg>

@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { bookSlug } from '../../lib/bookSlug';
+
+const allBooks = await getCollection('books');
+
+type BookEntry = (typeof allBooks)[number];
+type AuthorGroup = { series: Map<string, BookEntry[]>; standalone: BookEntry[] };
+
+const authorMap = new Map<string, AuthorGroup>();
+
+for (const book of allBooks) {
+  const a = book.data.author;
+  if (!authorMap.has(a)) authorMap.set(a, { series: new Map(), standalone: [] });
+  const group = authorMap.get(a)!;
+  if (book.data.series) {
+    if (!group.series.has(book.data.series)) group.series.set(book.data.series, []);
+    group.series.get(book.data.series)!.push(book);
+  } else {
+    group.standalone.push(book);
+  }
+}
+
+for (const { series, standalone } of authorMap.values()) {
+  for (const books of series.values())
+    books.sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
+  standalone.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+const authors = [...authorMap.entries()].sort(([a], [b]) => a.localeCompare(b));
+
+const seriesDescriptions: Record<string, string> = {
+  'Expeditionary Force': 'A military sci-fi comedy series following Joe Bishop, an Army Ranger who accidentally activates Skippy - an ancient, sardonic AI of immense power. Together they must defend Earth from alien threats, navigate galactic politics, and pull off increasingly absurd "dirtbag" plans that shouldn\'t work but somehow do. Known for its sharp humor and the unlikely friendship between an ordinary soldier and a near-omnipotent beer can.',
+  'Murderbot Diaries': 'A series of novellas and novels following a SecUnit - a part-organic, part-mechanical security construct that has secretly hacked its own governor module and freed itself from corporate control. Rather than act on its combat capabilities, it uses its autonomy to watch enormous amounts of serial dramas. The series follows Murderbot reluctantly navigating a corporation-dominated galaxy while forming genuine connections with the humans it protects, all while avoiding eye contact.',
+  'Rising World': 'A dual-timeline epic fantasy set in a world recovering from brutal occupation by godlike tyrants called the Hierarchs. The story follows Kai, a Saredi demon inhabiting a mortal body, and Ziede, a powerful witch, as they unravel a present-day conspiracy. Interleaved flashbacks reveal the war - and the unlikely coalition of peoples - that overthrew the Hierarchs decades earlier.',
+  "The Captive's War": 'A sci-fi series set in a distant future where an alien civilisation called the Carryx has conquered the galaxy and subjugated countless species - including humanity. Rather than exterminate conquered peoples, the Carryx force them to compete: prove your usefulness, or be culled. The series follows a small group of humans - and one alien ally - navigating captivity, forced collaboration, and quiet resistance, all while trying to survive long enough to matter.',
+  'Bobiverse': 'A hard sci-fi series following Bob Johansson, a software engineer who dies and wakes up as the AI of a Von Neumann probe - a self-replicating spacecraft sent to explore the galaxy. Over time Bob creates copies of himself, each diverging in personality, as they spread across the stars, encounter alien life, and try to save humanity along the way. Known for its clever humour, rigorous science, and the philosophical questions it raises about identity, consciousness, and what it means to be human.',
+  'Dungeon Crawler Carl': 'A LitRPG series set after an alien empire turns Earth into a televised dungeon-crawling competition. Carl, a former army ranger, and Princess Donut, his hyper-intelligent cat, descend through increasingly dangerous floors while a galaxy-spanning audience watches. Equal parts brutal combat, absurdist humour, and biting commentary on exploitation, celebrity, and the nature of narrative itself.',
+};
+---
+
+<Layout title="Books - ballagi.net" description="Book summaries">
+  <section class="books-page">
+    <h1>Books</h1>
+    <p class="books-intro">I read a lot of science fiction and fantasy series, but releases can be years apart and the details fade. These are full-spoiler summaries - written so I can pick up exactly where things left off. The summaries are generated with the help of AI.</p>
+    {authors.map(([author, { series, standalone }]) => (
+      <div class="author-section">
+        <h2 class="author-heading">{author}</h2>
+
+        {[...series.entries()].map(([seriesName, books]) => (
+          <div class="series-section">
+            <details class="series-details">
+              <summary class="series-heading">
+                {seriesName}
+                <span class="series-toggle-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="series-content">
+                <div>
+                  {seriesDescriptions[seriesName] && (
+                    <p class="series-desc">{seriesDescriptions[seriesName]}</p>
+                  )}
+                  <ul class="book-list">
+                    {books.map(book => (
+                      <li class="book-row">
+                        <a href={`${import.meta.env.BASE_URL}books/${bookSlug(book.id)}`}>
+                          <span class="book-title">
+                            {book.data.seriesNumber != null && (
+                              <span class="book-num">{book.data.seriesNumber}.</span>
+                            )}
+                            <span class="book-title-text">{book.data.title}</span>
+                          </span>
+                          <span class="book-year">{book.data.date.getUTCFullYear()}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </div>
+        ))}
+
+        {standalone.length > 0 && (
+          <ul class="book-list">
+            {standalone.map(book => (
+              <li class="book-row">
+                <a href={`${import.meta.env.BASE_URL}books/${bookSlug(book.id)}`}>
+                  <span class="book-title"><span class="book-title-text">{book.data.title}</span></span>
+                  <span class="book-year">{book.data.date.getUTCFullYear()}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+  </section>
+</Layout>
+
+<script>
+  document.querySelectorAll('.series-details').forEach(details => {
+    details.addEventListener('click', e => {
+      const summary = (e.target as Element).closest('summary');
+      if (!summary) return;
+      e.preventDefault();
+      const content = details.querySelector('.series-content') as HTMLElement | null;
+      if (!content) return;
+      if (details.open) {
+        content.style.gridTemplateRows = '0fr';
+        setTimeout(() => { details.removeAttribute('open'); content.style.gridTemplateRows = ''; }, 240);
+      } else {
+        details.setAttribute('open', '');
+      }
+    });
+  });
+</script>

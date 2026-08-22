@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+const profile = await getEntry('profile', 'index');
+if (!profile) throw new Error('src/content/profile/index.md not found');
+
+const { Content } = await render(profile);
+const { name, tagline, experience = [], education = [] } = profile.data;
+
+// First occurrence of each company = major point; later roles = minor
+const seenCompanies = new Set<string>();
+const items = experience.map(item => {
+  const major = !seenCompanies.has(item.company);
+  seenCompanies.add(item.company);
+  return { ...item, major };
+});
+---
+
+<Layout title={name} description={`${name} - ${tagline}`}>
+  <article class="profile-page">
+    <img src={`${import.meta.env.BASE_URL}img/avatar.png`} alt={name} class="profile-avatar" />
+    <div class="profile-header">
+      <h1>{name}</h1>
+      <p class="tagline">{tagline}</p>
+    </div>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {items.length > 0 && (
+      <section class="experience-section">
+        <h2 class="section-label">Experience</h2>
+        <div class="timeline">
+          {items.map((item, i) => {
+            const isNewCompany = i > 0 && items[i - 1].company !== item.company;
+            return (
+            <div class={`timeline-item${item.major ? '' : ' minor'}${isNewCompany ? ' company-break' : ''}`}>
+              <div class="timeline-stem">
+                <div class="timeline-dot"></div>
+                {i < items.length - 1
+                  ? <div class="timeline-line"></div>
+                  : <div class="timeline-line timeline-line-tail"></div>
+                }
+              </div>
+              <div class="timeline-content">
+                <p class="tl-role">{item.role}</p>
+                <p class="tl-company">
+                  {item.logo && <img src={item.logo} alt={item.company} class="company-logo" />}
+                  {item.url
+                    ? <a href={item.url} target="_blank" rel="noopener" class="tl-company-link">{item.company}</a>
+                    : item.company
+                  }
+                  {item.location && <span class="tl-location">{item.location}</span>}
+                </p>
+                <p class="tl-period">
+                  <span class="period-start">{item.period.split('\u2013')[0].trim()}</span>
+                  {item.period.includes('\u2013') && <span class="period-end">{item.period.split('\u2013')[1].trim()}</span>}
+                </p>
+                <p class="tl-desc">{item.description}</p>
+                {item.tech && item.tech.length > 0 && (
+                  <p class="tl-tech">
+                    {item.tech.map(t => <span class="tl-tech-item">{t}</span>)}
+                  </p>
+                )}
+              </div>
+            </div>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    {education.length > 0 && (
+      <section class="experience-section">
+        <h2 class="section-label">Education</h2>
+        <div class="timeline">
+          {education.map((item, i) => (
+            <div class="timeline-item">
+              <div class="timeline-stem">
+                <div class="timeline-dot"></div>
+                {i < education.length - 1
+                  ? <div class="timeline-line"></div>
+                  : <div class="timeline-line timeline-line-tail"></div>
+                }
+              </div>
+              <div class="timeline-content">
+                <p class="tl-role">{item.degree}, {item.field}</p>
+                <p class="tl-company">
+                  {item.logo && <img src={item.logo} alt={item.institution} class="company-logo" />}
+                  {item.url
+                    ? <a href={item.url} target="_blank" rel="noopener" class="tl-company-link">{item.institution}</a>
+                    : item.institution
+                  }
+                  {item.location && <span class="tl-location">{item.location}</span>}
+                </p>
+                <p class="tl-period">
+                  <span class="period-start">{item.period.split('\u2013')[0].trim()}</span>
+                  {item.period.includes('\u2013') && <span class="period-end">{item.period.split('\u2013')[1].trim()}</span>}
+                </p>
+                {item.note && <p class="tl-tech">{item.note}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+  </article>
+</Layout>

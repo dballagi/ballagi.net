@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360">
+  <rect width="800" height="360" fill="#eae6e0"/>
+  <rect x="55" y="15" width="690" height="330" rx="3" fill="rgb(31,31,31)"/>
+
+  <!-- Floor areas (MAP_INSIDE: darker than outside) -->
+  <rect x="70" y="28" width="340" height="175" fill="rgb(3,31,31)"/>
+  <rect x="408" y="70" width="42" height="90" fill="rgb(3,31,31)"/>
+  <!-- Right room floor -->
+  <rect x="448" y="28" width="285" height="175" fill="rgb(3,31,31)"/>
+  <!-- Systematic cleaning grid (inline dots) -->
+  <g fill="rgb(55,65,72)" opacity="0.85">
+    <circle cx="460" cy="40" r="1.2"/><circle cx="472" cy="40" r="1.2"/><circle cx="484" cy="40" r="1.2"/><circle cx="496" cy="40" r="1.2"/><circle cx="508" cy="40" r="1.2"/><circle cx="520" cy="40" r="1.2"/><circle cx="532" cy="40" r="1.2"/><circle cx="544" cy="40" r="1.2"/><circle cx="556" cy="40" r="1.2"/><circle cx="568" cy="40" r="1.2"/><circle cx="580" cy="40" r="1.2"/><circle cx="592" cy="40" r="1.2"/><circle cx="604" cy="40" r="1.2"/><circle cx="616" cy="40" r="1.2"/><circle cx="628" cy="40" r="1.2"/><circle cx="640" cy="40" r="1.2"/><circle cx="652" cy="40" r="1.2"/><circle cx="664" cy="40" r="1.2"/><circle cx="676" cy="40" r="1.2"/><circle cx="688" cy="40" r="1.2"/><circle cx="700" cy="40" r="1.2"/><circle cx="712" cy="40" r="1.2"/><circle cx="724" cy="40" r="1.2"/>
+    <circle cx="460" cy="52" r="1.2"/><circle cx="472" cy="52" r="1.2"/><circle cx="484" cy="52" r="1.2"/><circle cx="496" cy="52" r="1.2"/><circle cx="508" cy="52" r="1.2"/><circle cx="520" cy="52" r="1.2"/><circle cx="532" cy="52" r="1.2"/><circle cx="544" cy="52" r="1.2"/><circle cx="556" cy="52" r="1.2"/><circle cx="568" cy="52" r="1.2"/><circle cx="580" cy="52" r="1.2"/><circle cx="592" cy="52" r="1.2"/><circle cx="604" cy="52" r="1.2"/><circle cx="616" cy="52" r="1.2"/><circle cx="628" cy="52" r="1.2"/><circle cx="640" cy="52" r="1.2"/><circle cx="652" cy="52" r="1.2"/><circle cx="664" cy="52" r="1.2"/><circle cx="676" cy="52" r="1.2"/><circle cx="688" cy="52" r="1.2"/><circle cx="700" cy="52" r="1.2"/><circle cx="712" cy="52" r="1.2"/><circle cx="724" cy="52" r="1.2"/>
+    <circle cx="460" cy="64" r="1.2"/><circle cx="472" cy="64" r="1.2"/><circle cx="484" cy="64" r="1.2"/><circle cx="496" cy="64" r="1.2"/><circle cx="508" cy="64" r="1.2"/><circle cx="520" cy="64" r="1.2"/><circle cx="532" cy="64" r="1.2"/><circle cx="544" cy="64" r="1.2"/><circle cx="556" cy="64" r="1.2"/><circle cx="568" cy="64" r="1.2"/><circle cx="580" cy="64" r="1.2"/><circle cx="592" cy="64" r="1.2"/><circle cx="604" cy="64" r="1.2"/><circle cx="616" cy="64" r="1.2"/><circle cx="628" cy="64" r="1.2"/><circle cx="640" cy="64" r="1.2"/><circle cx="652" cy="64" r="1.2"/><circle cx="664" cy="64" r="1.2"/><circle cx="676" cy="64" r="1.2"/><circle cx="688" cy="64" r="1.2"/><circle cx="700" cy="64" r="1.2"/><circle cx="712" cy="64" r="1.2"/><circle cx="724" cy="64" r="1.2"/>
+    <circle cx="460" cy="76" r="1.2"/><circle cx="472" cy="76" r="1.2"/><circle cx="484" cy="76" r="1.2"/><circle cx="496" cy="76" r="1.2"/><circle cx="508" cy="76" r="1.2"/><circle cx="520" cy="76" r="1.2"/><circle cx="532" cy="76" r="1.2"/><circle cx="544" cy="76" r="1.2"/><circle cx="556" cy="76" r="1.2"/><circle cx="568" cy="76" r="1.2"/><circle cx="580" cy="76" r="1.2"/><circle cx="592" cy="76" r="1.2"/><circle cx="604" cy="76" r="1.2"/><circle cx="616" cy="76" r="1.2"/><circle cx="628" cy="76" r="1.2"/><circle cx="640" cy="76" r="1.2"/><circle cx="652" cy="76" r="1.2"/><circle cx="664" cy="76" r="1.2"/><circle cx="676" cy="76" r="1.2"/><circle cx="688" cy="76" r="1.2"/><circle cx="700" cy="76" r="1.2"/><circle cx="712" cy="76" r="1.2"/><circle cx="724" cy="76" r="1.2"/>
+    <circle cx="460" cy="88" r="1.2"/><circle cx="472" cy="88" r="1.2"/><circle cx="484" cy="88" r="1.2"/><circle cx="496" cy="88" r="1.2"/><circle cx="508" cy="88" r="1.2"/><circle cx="520" cy="88" r="1.2"/><circle cx="532" cy="88" r="1.2"/><circle cx="544" cy="88" r="1.2"/><circle cx="556" cy="88" r="1.2"/><circle cx="568" cy="88" r="1.2"/><circle cx="580" cy="88" r="1.2"/><circle cx="592" cy="88" r="1.2"/><circle cx="604" cy="88" r="1.2"/><circle cx="616" cy="88" r="1.2"/><circle cx="628" cy="88" r="1.2"/><circle cx="640" cy="88" r="1.2"/><circle cx="652" cy="88" r="1.2"/><circle cx="664" cy="88" r="1.2"/><circle cx="676" cy="88" r="1.2"/><circle cx="688" cy="88" r="1.2"/><circle cx="700" cy="88" r="1.2"/><circle cx="712" cy="88" r="1.2"/><circle cx="724" cy="88" r="1.2"/>
+    <circle cx="460" cy="100" r="1.2"/><circle cx="472" cy="100" r="1.2"/><circle cx="484" cy="100" r="1.2"/><circle cx="496" cy="100" r="1.2"/><circle cx="508" cy="100" r="1.2"/><circle cx="520" cy="100" r="1.2"/><circle cx="532" cy="100" r="1.2"/><circle cx="544" cy="100" r="1.2"/><circle cx="556" cy="100" r="1.2"/><circle cx="568" cy="100" r="1.2"/><circle cx="580" cy="100" r="1.2"/><circle cx="592" cy="100" r="1.2"/><circle cx="604" cy="100" r="1.2"/><circle cx="616" cy="100" r="1.2"/><circle cx="628" cy="100" r="1.2"/><circle cx="640" cy="100" r="1.2"/><circle cx="652" cy="100" r="1.2"/><circle cx="664" cy="100" r="1.2"/><circle cx="676" cy="100" r="1.2"/><circle cx="688" cy="100" r="1.2"/><circle cx="700" cy="100" r="1.2"/><circle cx="712" cy="100" r="1.2"/><circle cx="724" cy="100" r="1.2"/>
+    <circle cx="460" cy="112" r="1.2"/><circle cx="472" cy="112" r="1.2"/><circle cx="484" cy="112" r="1.2"/><circle cx="496" cy="112" r="1.2"/><circle cx="508" cy="112" r="1.2"/><circle cx="520" cy="112" r="1.2"/><circle cx="532" cy="112" r="1.2"/><circle cx="544" cy="112" r="1.2"/><circle cx="556" cy="112" r="1.2"/><circle cx="568" cy="112" r="1.2"/><circle cx="580" cy="112" r="1.2"/><circle cx="592" cy="112" r="1.2"/><circle cx="604" cy="112" r="1.2"/><circle cx="616" cy="112" r="1.2"/><circle cx="628" cy="112" r="1.2"/><circle cx="640" cy="112" r="1.2"/><circle cx="652" cy="112" r="1.2"/><circle cx="664" cy="112" r="1.2"/><circle cx="676" cy="112" r="1.2"/><circle cx="688" cy="112" r="1.2"/><circle cx="700" cy="112" r="1.2"/><circle cx="712" cy="112" r="1.2"/><circle cx="724" cy="112" r="1.2"/>
+    <circle cx="460" cy="124" r="1.2"/><circle cx="472" cy="124" r="1.2"/><circle cx="484" cy="124" r="1.2"/><circle cx="496" cy="124" r="1.2"/><circle cx="508" cy="124" r="1.2"/><circle cx="520" cy="124" r="1.2"/><circle cx="532" cy="124" r="1.2"/><circle cx="544" cy="124" r="1.2"/><circle cx="556" cy="124" r="1.2"/><circle cx="568" cy="124" r="1.2"/><circle cx="580" cy="124" r="1.2"/><circle cx="592" cy="124" r="1.2"/><circle cx="604" cy="124" r="1.2"/><circle cx="616" cy="124" r="1.2"/><circle cx="628" cy="124" r="1.2"/><circle cx="640" cy="124" r="1.2"/><circle cx="652" cy="124" r="1.2"/><circle cx="664" cy="124" r="1.2"/><circle cx="676" cy="124" r="1.2"/><circle cx="688" cy="124" r="1.2"/><circle cx="700" cy="124" r="1.2"/><circle cx="712" cy="124" r="1.2"/><circle cx="724" cy="124" r="1.2"/>
+    <circle cx="460" cy="136" r="1.2"/><circle cx="472" cy="136" r="1.2"/><circle cx="484" cy="136" r="1.2"/><circle cx="496" cy="136" r="1.2"/><circle cx="508" cy="136" r="1.2"/><circle cx="520" cy="136" r="1.2"/><circle cx="532" cy="136" r="1.2"/><circle cx="544" cy="136" r="1.2"/><circle cx="556" cy="136" r="1.2"/><circle cx="568" cy="136" r="1.2"/><circle cx="580" cy="136" r="1.2"/><circle cx="592" cy="136" r="1.2"/><circle cx="604" cy="136" r="1.2"/><circle cx="616" cy="136" r="1.2"/><circle cx="628" cy="136" r="1.2"/><circle cx="640" cy="136" r="1.2"/><circle cx="652" cy="136" r="1.2"/><circle cx="664" cy="136" r="1.2"/><circle cx="676" cy="136" r="1.2"/><circle cx="688" cy="136" r="1.2"/><circle cx="700" cy="136" r="1.2"/><circle cx="712" cy="136" r="1.2"/><circle cx="724" cy="136" r="1.2"/>
+    <circle cx="460" cy="148" r="1.2"/><circle cx="472" cy="148" r="1.2"/><circle cx="484" cy="148" r="1.2"/><circle cx="496" cy="148" r="1.2"/><circle cx="508" cy="148" r="1.2"/><circle cx="520" cy="148" r="1.2"/><circle cx="532" cy="148" r="1.2"/><circle cx="544" cy="148" r="1.2"/><circle cx="556" cy="148" r="1.2"/><circle cx="568" cy="148" r="1.2"/><circle cx="580" cy="148" r="1.2"/><circle cx="592" cy="148" r="1.2"/><circle cx="604" cy="148" r="1.2"/><circle cx="616" cy="148" r="1.2"/><circle cx="628" cy="148" r="1.2"/><circle cx="640" cy="148" r="1.2"/><circle cx="652" cy="148" r="1.2"/><circle cx="664" cy="148" r="1.2"/><circle cx="676" cy="148" r="1.2"/><circle cx="688" cy="148" r="1.2"/><circle cx="700" cy="148" r="1.2"/><circle cx="712" cy="148" r="1.2"/><circle cx="724" cy="148" r="1.2"/>
+    <circle cx="460" cy="160" r="1.2"/><circle cx="472" cy="160" r="1.2"/><circle cx="484" cy="160" r="1.2"/><circle cx="496" cy="160" r="1.2"/><circle cx="508" cy="160" r="1.2"/><circle cx="520" cy="160" r="1.2"/><circle cx="532" cy="160" r="1.2"/><circle cx="544" cy="160" r="1.2"/><circle cx="556" cy="160" r="1.2"/><circle cx="568" cy="160" r="1.2"/><circle cx="580" cy="160" r="1.2"/><circle cx="592" cy="160" r="1.2"/><circle cx="604" cy="160" r="1.2"/><circle cx="616" cy="160" r="1.2"/><circle cx="628" cy="160" r="1.2"/><circle cx="640" cy="160" r="1.2"/><circle cx="652" cy="160" r="1.2"/><circle cx="664" cy="160" r="1.2"/><circle cx="676" cy="160" r="1.2"/><circle cx="688" cy="160" r="1.2"/><circle cx="700" cy="160" r="1.2"/><circle cx="712" cy="160" r="1.2"/><circle cx="724" cy="160" r="1.2"/>
+    <circle cx="460" cy="172" r="1.2"/><circle cx="472" cy="172" r="1.2"/><circle cx="484" cy="172" r="1.2"/><circle cx="496" cy="172" r="1.2"/><circle cx="508" cy="172" r="1.2"/><circle cx="520" cy="172" r="1.2"/><circle cx="532" cy="172" r="1.2"/><circle cx="544" cy="172" r="1.2"/><circle cx="556" cy="172" r="1.2"/><circle cx="568" cy="172" r="1.2"/><circle cx="580" cy="172" r="1.2"/><circle cx="592" cy="172" r="1.2"/><circle cx="604" cy="172" r="1.2"/><circle cx="616" cy="172" r="1.2"/><circle cx="628" cy="172" r="1.2"/><circle cx="640" cy="172" r="1.2"/><circle cx="652" cy="172" r="1.2"/><circle cx="664" cy="172" r="1.2"/><circle cx="676" cy="172" r="1.2"/><circle cx="688" cy="172" r="1.2"/><circle cx="700" cy="172" r="1.2"/><circle cx="712" cy="172" r="1.2"/><circle cx="724" cy="172" r="1.2"/>
+  </g>
+  <rect x="160" y="200" width="250" height="140" fill="rgb(3,31,31)"/>
+  <rect x="408" y="200" width="200" height="140" fill="rgb(3,31,31)"/>
+
+  <!-- Walls (MAP_WALL) -->
+  <rect x="63" y="21" width="674" height="10" fill="rgb(62,71,80)"/>
+  <rect x="63" y="319" width="674" height="10" fill="rgb(62,71,80)"/>
+  <rect x="63" y="21" width="10" height="310" fill="rgb(62,71,80)"/>
+  <rect x="727" y="21" width="10" height="310" fill="rgb(62,71,80)"/>
+  <rect x="408" y="21" width="8" height="50" fill="rgb(62,71,80)"/>
+  <rect x="408" y="158" width="8" height="45" fill="rgb(62,71,80)"/>
+  <rect x="63" y="200" width="98" height="8" fill="rgb(62,71,80)"/>
+  <rect x="220" y="200" width="190" height="8" fill="rgb(62,71,80)"/>
+  <rect x="408" y="200" width="200" height="8" fill="rgb(62,71,80)"/>
+  <rect x="160" y="200" width="8" height="140" fill="rgb(62,71,80)"/>
+
+  <!-- Furniture / obstacles -->
+  <rect x="90" y="50" width="55" height="35" rx="3" fill="rgb(50,58,68)" opacity="0.85"/>
+  <rect x="90" y="100" width="35" height="55" rx="2" fill="rgb(50,58,68)" opacity="0.85"/>
+  <rect x="230" y="42" width="90" height="40" rx="2" fill="rgb(48,56,66)" opacity="0.85"/>
+  <rect x="475" y="40" width="60" height="50" rx="2" fill="rgb(50,58,68)" opacity="0.65"/>
+  <rect x="620" y="40" width="90" height="60" rx="2" fill="rgb(50,58,68)" opacity="0.65"/>
+  <rect x="435" y="240" width="80" height="50" rx="2" fill="rgb(50,58,68)" opacity="0.75"/>
+
+  <!-- NO_GO_ZONE (semi-transparent red) -->
+  <rect x="175" y="208" width="130" height="80" rx="2" fill="rgba(224,89,91,0.55)"/>
+  <rect x="175" y="208" width="130" height="80" rx="2" fill="none" stroke="rgb(255,60,60)" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- Cleaning path (smooth organic curve) -->
+  <path d="M 108,310 C 130,280 110,240 170,230 C 230,220 260,190 310,170 C 360,150 330,120 380,95 C 410,78 430,100 430,130 C 430,155 400,165 370,150 C 340,135 340,100 360,80 C 380,62 440,55 480,58"
+    stroke="rgb(200,200,200)" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Charger -->
+  <rect x="72" y="28" width="8" height="14" rx="2" fill="rgb(70,70,78)"/>
+  <circle cx="76" cy="30" r="3" fill="rgb(140,140,150)"/>
+
+  <!-- Robot -->
+  <circle cx="108" cy="310" r="14" fill="rgb(55,62,70)"/>
+  <circle cx="108" cy="310" r="11" fill="rgb(185,185,185)"/>
+  <circle cx="108" cy="310" r="4" fill="rgb(55,62,70)" opacity="0.5"/>
+  <line x1="108" y1="305" x2="115" y2="298" stroke="rgb(55,62,70)" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

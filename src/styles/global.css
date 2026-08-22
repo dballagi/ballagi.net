@@ -1,0 +1,1337 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f4f0;
+  --fg: #111;
+  --muted: #6b6b6b;
+  --subtle: #999;
+  --border: #dddbd5;
+  --tag-bg: #eceae4;
+  --tag-fg: #555;
+}
+
+[data-theme="dark"] {
+  --bg: #111;
+  --fg: #e8e8e8;
+  --muted: #888;
+  --subtle: #5c5c5c;
+  --border: #2a2a2a;
+  --tag-bg: #1c1c1c;
+  --tag-fg: #999;
+}
+
+html {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background 0.15s, color 0.15s;
+  overscroll-behavior-y: contain;
+}
+
+body {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+/* -- Navigation ------------------------------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--bg);
+  transition: background 0.15s;
+}
+
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+nav a {
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+  color: var(--fg);
+}
+
+/* -- Theme toggle ------------------------------ */
+
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+#theme-toggle:hover {
+  color: var(--fg);
+}
+
+#theme-toggle::before {
+  content: "\25CF";
+}
+
+[data-theme="dark"] #theme-toggle::before {
+  content: "\25CB";
+}
+
+/* -- Profile header ---------------------------- */
+
+.profile-header {
+  margin-bottom: 3rem;
+}
+
+.profile-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.profile-header .tagline {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+
+.social-links a:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+/* -- Prose (rendered markdown body) ----------- */
+
+.prose h2 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.75rem 0 1rem;
+}
+
+.prose h3 {
+  font-size: 0.925rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+/* In books with parts, h3 = chapter heading — match h2 section label style */
+.book-page .prose h3 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.75rem 0 1rem;
+}
+
+.prose p {
+  font-size: 0.925rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose a {
+  color: var(--fg);
+  text-underline-offset: 3px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25rem;
+  font-size: 0.925rem;
+}
+
+.prose li {
+  margin-bottom: 0.25rem;
+}
+
+.prose hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%);
+  margin: 2rem 0;
+}
+
+/* Book summaries use h2 for structure; hide inconsistently-placed HRs */
+.book-page .prose hr { display: none; }
+
+/* Part-level separator: only when prose has h3 chapters below h2 parts */
+.book-page .prose:has(h3) h2:not(:first-of-type) {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%) 1;
+}
+
+/* -- Tags -------------------------------------- */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  color: var(--tag-fg);
+  background: var(--tag-bg);
+  padding: 0.2em 0.55em;
+  border-radius: 3px;
+  letter-spacing: 0.01em;
+}
+
+.prose pre {
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  line-height: 1.55;
+}
+
+.prose pre code {
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.8rem;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.prose :not(pre) > code {
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.85em;
+  background: var(--tag-bg);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin: 1.25rem 0;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* -- Tinkering page ---------------------------- */
+
+.tinkering-page h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.tinkering-intro {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.post-list {
+  list-style: none;
+}
+
+.post-row {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-row:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.post-row a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.post-row a:hover .post-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-title {
+  font-size: 0.925rem;
+  font-weight: 500;
+}
+
+.post-desc {
+  font-size: 0.825rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+
+/* Theme-aware image pairs - !important needed to beat .post-thumb { display: block } */
+.post-thumb.theme-img-dark,
+.post-hero.theme-img-dark { display: none !important; }
+[data-theme="dark"] .post-thumb.theme-img-dark,
+[data-theme="dark"] .post-hero.theme-img-dark { display: block !important; }
+[data-theme="dark"] .post-thumb.theme-img-light,
+[data-theme="dark"] .post-hero.theme-img-light { display: none !important; }
+
+.post-hero {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+/* -- Post article page ------------------------- */
+
+.post-page .back {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.post-page .back:hover {
+  color: var(--fg);
+}
+
+.post-page header {
+  display: block;
+  position: static;
+  margin-bottom: 2.5rem;
+}
+
+.post-page h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.post-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* -- Books page -------------------------------- */
+
+.books-page h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.books-intro {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.author-section {
+  margin-bottom: 3rem;
+}
+
+.author-heading {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 1rem;
+}
+
+.series-section {
+  margin-bottom: 1.25rem;
+}
+
+.series-heading {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--border);
+}
+
+.book-list {
+  list-style: none;
+}
+
+.book-row {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%) 1;
+}
+
+.book-row:first-child {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%) 1;
+}
+
+.book-row a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.book-row a:hover .book-title-text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.book-num {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.5rem;
+  flex-shrink: 0;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.book-title {
+  font-size: 0.825rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.book-year {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.book-disclaimer {
+  font-size: 0.75rem;
+  color: var(--subtle);
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%) 1;
+}
+
+/* -- Book page --------------------------------- */
+
+.book-page .back {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.book-page .back:hover {
+  color: var(--fg);
+}
+
+.book-page header {
+  display: block;
+  position: static;
+  margin-bottom: 2.5rem;
+}
+
+.book-page h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.book-meta {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.rating {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  letter-spacing: 2px;
+}
+
+/* -- Timeline ---------------------------------- */
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.75rem 0 1.25rem;
+}
+
+.experience-section {
+  margin-bottom: 2.75rem;
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  column-gap: 0.875rem;
+  padding-bottom: 1.75rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-stem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fg);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-item.minor .timeline-dot {
+  width: 6px;
+  height: 6px;
+  margin-top: 1px;
+}
+
+.timeline-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
+  margin-top: 3px;
+  margin-bottom: -1.75rem;
+}
+
+/* Fade out the line that leads into a new company entry */
+.timeline-item:has(+ .timeline-item.company-break) .timeline-line {
+  background: linear-gradient(to bottom, var(--border) 0%, transparent 100%);
+}
+
+.timeline-item.minor .timeline-dot {
+  background: var(--subtle);
+}
+
+/* Faded tail below the last timeline item */
+.timeline-line-tail {
+  background: linear-gradient(to bottom, var(--border), transparent);
+  height: 2.5rem;
+  margin-bottom: 0;
+}
+
+.timeline-item.company-break {
+  padding-top: 1.5rem;
+}
+
+.company-logo {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 0.35rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  padding-bottom: 0.125rem;
+}
+
+.tl-role {
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--fg);
+}
+
+.tl-company {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.tl-location {
+  color: var(--subtle);
+}
+
+.tl-location::before {
+  content: '\B7';
+  margin: 0 0.4em;
+  color: var(--subtle);
+}
+
+.tl-period {
+  font-size: 0.775rem;
+  color: var(--subtle);
+  margin-top: 0.1rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.tl-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--fg);
+  margin-top: 0.5rem;
+}
+
+.tl-tech {
+  font-size: 0.75rem;
+  color: var(--subtle);
+  margin-top: 0.4rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+/* -- Footer ------------------------------------ */
+
+footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%) 1;
+  font-size: 0.78rem;
+  color: var(--subtle);
+  text-align: center;
+}
+
+/* -- Responsive -------------------------------- */
+
+@media (max-width: 560px) {
+  body {
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .book-list li a {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+/* -- Tinkering card layout (overrides) -------- */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.post-row {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+}
+.post-row:first-child { border-top: none; }
+.post-thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  border-radius: 0;
+  transition: transform 0.2s;
+}
+.post-body {
+  padding: 0.75rem 1rem;
+}
+.post-row .post-desc {
+  padding: 0;
+  margin-top: 0.3rem;
+}
+
+/* Back button floated into nav gap (overrides) */
+.book-page,
+.post-page {
+  position: relative;
+}
+
+.book-page .back,
+.post-page .back {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  display: block;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.book-page .back:hover,
+.post-page .back:hover {
+  color: var(--fg);
+}
+
+/* Unify h1 line-height across all pages to fix pixel offset */
+.tinkering-page h1,
+.books-page h1,
+.profile-header h1 {
+  line-height: 1.3;
+}
+
+/* Education list */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.edu-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.edu-logo {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.edu-content {
+  flex: 1;
+}
+
+.edu-degree {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.35;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+
+.nav-favicon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
+.nav-brand:hover .nav-favicon {
+  opacity: 1;
+}
+/* Series accordion */
+.series-details {
+  margin-bottom: 0.25rem;
+}
+
+.series-details summary.series-heading {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+  margin-bottom: 0;
+}
+
+.series-details summary.series-heading::-webkit-details-marker { display: none; }
+.series-details summary.series-heading::marker { display: none; }
+
+.series-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--subtle);
+  font-size: 0.5rem;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.series-toggle-icon::before {
+  content: '\25B6';
+}
+
+.series-details[open] .series-toggle-icon {
+  transform: rotate(90deg);
+}
+
+.series-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0.6rem 0 0.8rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--border);
+}
+
+.series-details .book-list {
+  margin-top: 0.25rem;
+}
+
+/* Dark mode favicon inversion */
+[data-theme="dark"] .nav-favicon {
+  filter: invert(1);
+}
+/* Series accordion animation overrides */
+.series-details summary.series-heading {
+  justify-content: space-between;
+}
+
+/* CSS border chevron replaces triangle */
+.series-toggle-icon {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.24s ease;
+  flex-shrink: 0;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-bottom: 1px;
+}
+
+.series-toggle-icon::before { content: none; }
+
+.series-details[open] > summary .series-toggle-icon {
+  transform: rotate(45deg);
+}
+
+/* Grid roll-out animation for content */
+.series-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.24s ease;
+}
+
+.series-details[open] > .series-content {
+  grid-template-rows: 1fr;
+}
+
+.series-content > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.series-desc { color: var(--fg); }
+
+.series-details summary.series-heading:hover {
+  color: var(--fg);
+  border-left-color: var(--muted);
+}
+
+/* Code block copy button */
+.prose pre { position: static; }
+.pre-wrapper { position: relative; }
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--muted);
+  padding: 0.3rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 0;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pre-wrapper:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+.code-copy-btn.copied {
+  color: var(--fg);
+  border-color: var(--muted);
+  opacity: 1;
+}
+
+/* Book cover */
+.book-cover {
+  width: 90px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+  display: block;
+}
+
+/* Clickable tinkering card */
+.post-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.post-card-link:hover {
+  opacity: 0.88;
+}
+
+.post-card-link:hover .post-thumb {
+  transform: scale(1.02);
+}
+
+.post-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+/* Tinkering card â€” stretched link */
+.post-row { position: relative; }
+.post-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.post-row:hover { opacity: 0.88; }
+.post-row:hover .post-thumb { transform: scale(1.02); }
+.post-thumb-wrap {
+  display: block;
+  overflow: hidden;
+  height: 140px;
+}
+.post-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+/* Book cover â€” float right so text wraps around it */
+.book-cover {
+  float: right;
+  width: 90px;
+  margin-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+  display: block;
+}
+
+.book-page header { overflow: hidden; }
+
+/* Book cover button */
+.book-cover-btn {
+  float: right;
+  margin-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 6px;
+  line-height: 0;
+}
+
+.book-cover-btn .book-cover {
+  float: none;
+  margin: 0;
+  transition: opacity 0.15s;
+}
+
+.book-cover-btn:hover .book-cover { opacity: 0.85; }
+
+/* Lightbox */
+.cover-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-lightbox.open { display: flex; }
+
+.cover-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  cursor: default;
+}
+
+.cover-lightbox-img {
+  position: relative;
+  z-index: 1;
+  max-width: min(380px, 90vw);
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  object-fit: contain;
+  transition: opacity 0.2s;
+}
+
+.cover-lightbox-spinner {
+  display: none;
+  position: relative;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: lb-spin 0.7s linear infinite;
+}
+
+@keyframes lb-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* flow-root contains float without clipping the absolutely-positioned back link */
+.book-page { display: flow-root; }
+.book-page header { overflow: visible; }
+.book-cover-btn[disabled] { cursor: default; }
+.book-cover-btn:not([disabled]) { cursor: zoom-in; }
+
+.post-group{margin-bottom:2.5rem}
+.post-group-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.post-list{gap:1.75rem}
+
+.book-nav{display:flex;align-items:center}
+
+/* Lift nav into the outer nav's margin gap */
+.book-page .book-nav{position:absolute;top:-1.5rem;left:0;right:0}
+.book-page .back{position:static;top:auto;left:auto}
+
+/* Shiki dual-theme: default to light, switch on data-theme */
+.prose pre span { color: var(--shiki-light); }
+[data-theme='dark'] .prose pre span { color: var(--shiki-dark) !important; }
+
+/* Override Shiki injected background with site token */
+.prose pre { background-color: var(--tag-bg) !important; }
+
+/* Line numbers via CSS counter on Shiki .line spans */
+.prose pre code { counter-reset: line; }
+.prose pre code .line {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding-left: 3rem;
+  position: relative;
+  min-height: 1.55em;
+}
+.prose pre code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  position: absolute;
+  top: 0;
+  left: -0.75rem;
+  width: 2.25rem;
+  text-align: right;
+  color: var(--muted);
+  opacity: 0.35;
+  font-size: inherit;
+  user-select: none;
+  line-height: inherit;
+}
+.book-cover{opacity:0;transition:opacity 0.8s ease}
+.book-cover.loaded{opacity:1}
+
+.profile-page { display: flow-root; }
+.profile-avatar {
+  float: right;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  margin-left: 1.5rem;
+  margin-right: 0.375rem;
+  margin-bottom: 0.5rem;
+  /* box-shadow instead of outline so it respects z-index stacking */
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--border);
+}
+.book-cover-btn[disabled] { cursor: default; }
+.book-cover-btn:not([disabled]) { cursor: pointer; }
+.book-cover-btn { background: var(--tag-bg); min-width: 90px; min-height: 130px; }
+
+::selection { background: rgba(0,0,0,0.1); }
+[data-theme="dark"] ::selection { background: rgba(255,255,255,0.12); }
+
+.tl-company-link{color:inherit;text-decoration:none}
+.tl-company-link:hover{color:var(--fg)}
+
+.tl-tech-item+.tl-tech-item::before{content:"\B7";margin:0 0.4em;color:var(--subtle)}
+
+.book-meta-item+.book-meta-item::before{content:"\B7";margin:0 0.4em;color:var(--muted)}
+.period-end::before{content:"\2013";margin:0 0.4em;color:inherit}
+
+/* Scroll-to-top button */
+#scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 200;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--muted);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, color 0.15s, border-color 0.15s;
+}
+#scroll-top.visible { opacity: 1; pointer-events: auto; }
+#scroll-top:hover { color: var(--fg); border-color: var(--muted); }
+
+/* Lightbox close button */
+.cover-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.15s;
+}
+.cover-lightbox-close:hover { color: rgba(255,255,255,0.95); }
+
+.prose p, .prose li, .tl-desc, .books-intro, .tinkering-intro, .series-desc {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* -- Sticky nav: home / tinkering / books / book-detail / article ---------- */
+body:has(.profile-page),
+body:has(.tinkering-page),
+body:has(.books-page),
+body:has(.book-page),
+body:has(.post-page) {
+  padding-top: 0;
+}
+
+body:has(.profile-page) > header,
+body:has(.tinkering-page) > header,
+body:has(.books-page) > header {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+body:has(.book-page) > header,
+body:has(.post-page) > header {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+body:has(.profile-page) > header::after,
+body:has(.tinkering-page) > header::after,
+body:has(.books-page) > header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -1.5rem;
+  right: -1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+body:has(.profile-page) > header.scrolled::after,
+body:has(.tinkering-page) > header.scrolled::after,
+body:has(.books-page) > header.scrolled::after {
+  opacity: 1;
+}
+
+body:has(.profile-page) > header::before,
+body:has(.tinkering-page) > header::before,
+body:has(.books-page) > header::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -1.5rem;
+  right: -1.5rem;
+  height: 2rem;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+body:has(.profile-page) > header.scrolled::before,
+body:has(.tinkering-page) > header.scrolled::before,
+body:has(.books-page) > header.scrolled::before {
+  opacity: 1;
+}
+
+/* -- Book detail sticky section ------------------------------------------ */
+.book-sticky-header {
+  position: sticky;
+  top: calc(var(--site-nav-height, 5rem) - 1px);
+  background: var(--bg);
+  z-index: 50;
+  display: flow-root; /* establishes BFC so the floated cover is contained */
+  padding-top: 1px;
+  padding-bottom: 0.5rem;
+  transition: background 0.15s;
+}
+
+.book-sticky-header + .prose > :first-child { margin-top: 1rem; }
+
+.book-sticky-header header {
+  position: static;
+  margin-bottom: 0;
+}
+
+/* Keep nav static inside wrapper — overrides the absolute-in-nav-gap rule */
+.book-sticky-header .book-nav {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  margin-bottom: 0.35rem;
+}
+
+/* -- Tinkering article sticky section ------------------------------------ */
+.post-sticky-header {
+  position: sticky;
+  top: calc(var(--site-nav-height, 5rem) - 1px);
+  background: var(--bg);
+  z-index: 50;
+  padding-top: 1px;
+  padding-bottom: 1rem;
+  transition: background 0.15s;
+}
+
+/* Keep back link static inside wrapper */
+.post-sticky-header .back {
+  position: static;
+  top: auto;
+  left: auto;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.post-sticky-header header {
+  position: static;
+  margin-bottom: 0;
+}
+
+/* Separator and fade — shared by both inner sticky headers */
+.book-sticky-header::after,
+.post-sticky-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -1.5rem;
+  right: -1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--border) 18%, var(--border) 82%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.book-sticky-header.scrolled::after,
+.post-sticky-header.scrolled::after {
+  opacity: 1;
+}
+
+.book-sticky-header::before,
+.post-sticky-header::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -1.5rem;
+  right: -1.5rem;
+  height: 2rem;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.book-sticky-header.scrolled::before,
+.post-sticky-header.scrolled::before {
+  opacity: 1;
+}

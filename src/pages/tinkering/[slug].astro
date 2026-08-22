@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('tinkering');
+  return posts.map(post => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, description, tags, image } = post.data;
+const base = import.meta.env.BASE_URL;
+
+const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout title={`${title} - ballagi.net`} description={description}>
+  <article class="post-page">
+    <div class="post-sticky-header" id="post-sticky-header">
+      <a href={`${import.meta.env.BASE_URL}tinkering`} class="back">← Tinkering</a>
+      <header>
+        <h1>{title}</h1>
+        <p class="post-meta">{dateStr}</p>
+        {tags && (
+          <div class="tags">
+            {tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        )}
+      </header>
+    </div>
+    {image && (
+      <>
+        <img src={`${base}img/tinkering/${image}`} alt={title} class="post-hero theme-img-light" />
+        <img src={`${base}img/tinkering/${image.replace(/\.svg$/, '-dark.svg')}`} alt={title} class="post-hero theme-img-dark" />
+      </>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<script>
+  const siteNav = document.querySelector('body > header') as HTMLElement | null;
+  if (siteNav) {
+    document.documentElement.style.setProperty('--site-nav-height', siteNav.offsetHeight + 'px');
+  }
+  const stickyHdr = document.getElementById('post-sticky-header');
+  if (stickyHdr) {
+    window.addEventListener('scroll', () => {
+      stickyHdr.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+</script>
